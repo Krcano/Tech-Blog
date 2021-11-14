@@ -35,13 +35,13 @@ Writer.init(
         len: [8],
       },
     },
-    post_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: "post",
-          key: "id",
-        },
-      },
+    // post_id: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //       model: "post",
+    //       key: "id",
+    //     },
+    //   },
   },
   {
     hooks: {
