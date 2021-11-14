@@ -1,13 +1,13 @@
 const Writer = require('./Writer');
-const Posts = require('./Post');
+const Post = require('./Post');
 
-Writer.hasMany(Posts, {
+Writer.hasMany(Post, {
   foreignKey: 'writer_id',
   onDelete: 'CASCADE'
 });
 
-Posts.belongsTo(Writer, {
+Post.belongsTo(Writer, {
   foreignKey: 'writer_id'
 });
 
-module.exports = { Writer, Posts};
+module.exports = { Writer, Post};
