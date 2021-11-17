@@ -1,12 +1,14 @@
 const router = require('express').Router();
-const { Post } = require('../../models/Post');
+const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
   try {
+    console.log(req.body)
     const newPost = await Post.create({
-        // what does this do
-      ...req.body,
+        // Spread operator to include all that its in the request.body
+      name:req.body.name,
+      description: req.body.description,
       writer_id: req.session.writer_id,
     });
 
@@ -21,7 +23,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     const postData = await Post.destroy({
       where: {
         id: req.params.id,
-        user_id: req.session.writer_id,
+        writer_id: req.session.writer_id,
       },
     });
 

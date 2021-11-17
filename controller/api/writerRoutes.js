@@ -3,6 +3,7 @@ const { Writer } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
+    console.log(req.body)
     const writerData = await Writer.create(req.body);
 
     req.session.save(() => {
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
 
 router.post('/login', async (req, res) => {
   try {
-    const writerData = await User.findOne({ where: { email: req.body.email } });
+    const writerData = await Writer.findOne({ where: { email: req.body.email } });
 
     if (!writerData) {
       res
@@ -27,7 +28,7 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = await writerData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res

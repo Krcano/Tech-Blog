@@ -2,5 +2,31 @@
   <h2>{{name}}</h2>
   <p>{{description}}</p>
   <p>Created by {{writer.name}} on {{format_date date_created}}</p>
+  
+
+</div>
+{{!-- input form for adding a comment --}}
+
+{{!-- input type=tex, submit button make a new javascript file with event handlers --}}
+<div>
+  {{#if comments.length}}
+  <div class="col-md-6 project-list">
+    <h3>Current Comment:</h3>
+
+    {{#each comments as |comment|}}
+    {{!-- renders comments --}}
+    {{!-- <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/post/{{post.id}}">{{comment.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+      </div>
+    </div> --}}
+
+    {{/each}}
+  </div>
+  {{/if}}
+
 
 </div>
