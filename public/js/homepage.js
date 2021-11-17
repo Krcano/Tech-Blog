@@ -6,7 +6,8 @@ const newFormHandler = async (event) => {
 
   if (event.target.hasAttribute("data-id")) {
     const id = event.target.getAttribute("data-id");
-    const response = await fetch(`/api/post/${id}`, {
+
+    const response = await fetch(`/api/posts/${id}`, {
       method: "POST",
       body: JSON.stringify({ name, description }),
       headers: {
@@ -17,7 +18,7 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace("/homepage");
     } else {
-      alert("Failed to create post");
+      alert("Failed to view post");
     }
   }
 };

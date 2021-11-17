@@ -16,8 +16,8 @@ router.post("/", withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-// not working rendering the posts
-router.post("/", withAuth, async (req, res) => {
+// not working to render the comments
+router.post("/posts/:id", withAuth, async (req, res) => {
   try {
     console.log(req.body);
     const newComment = await Comment.create({
