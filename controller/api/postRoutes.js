@@ -1,13 +1,12 @@
-const router = require('express').Router();
-const { Post } = require('../../models');
-const withAuth = require('../../utils/auth');
+const router = require("express").Router();
+const { Post, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
-router.post('/', withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const newPost = await Post.create({
-        // Spread operator to include all that its in the request.body
-      name:req.body.name,
+      name: req.body.name,
       description: req.body.description,
       writer_id: req.session.writer_id,
     });
@@ -17,8 +16,22 @@ router.post('/', withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
+// not working rendering the posts
+router.post("/", withAuth, async (req, res) => {
+  try {
+    console.log(req.body);
+    const newComment = await Comment.create({
+      description: req.body.description,
+      date_created: req.body.date_created,
+      writer_id: req.body.writer_id,
+    });
+    res.status(200).json(newComment);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
       where: {
@@ -28,7 +41,7 @@ router.delete('/:id', withAuth, async (req, res) => {
     });
 
     if (!postData) {
-      res.status(404).json({ message: 'No post found with this id!' });
+      res.status(404).json({ message: "No post found with this id!" });
       return;
     }
 

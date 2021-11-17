@@ -11,7 +11,6 @@ router.get("/", async (req, res) => {
           model: Writer,
           attributes: ["name"],
         },
-       
       ],
     });
 
@@ -38,12 +37,14 @@ router.get("/post/:id", async (req, res) => {
         },
         {
           model: Comment,
+          attributes:["description"]
         },
       ],
     });
 
     const post = postData.get({ plain: true });
-console.log(post)
+
+    console.log(post);
     res.render("post", {
       // Uses the spread operator
       ...post,

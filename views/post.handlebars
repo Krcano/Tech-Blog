@@ -1,28 +1,40 @@
+
 <div class="text-center">
   <h2>{{name}}</h2>
   <p>{{description}}</p>
+ 
   <p>Created by {{writer.name}} on {{format_date date_created}}</p>
   
-
 </div>
-{{!-- input form for adding a comment --}}
 
+<form class="form new-project-form">
+<div class="form-group">
+{{!-- input form for adding a comment --}}
 {{!-- input type=tex, submit button make a new javascript file with event handlers --}}
-<div>
+ <label id='comment-name'for="comment">Comment:</label>
+  <input class="form-input" type="text" id="comment-descr" />
+  <div class="form-group">
+  <button class="btn btn-primary" type="submit">submit</button>
+  </div>
+  
+</div>
+</form>
+
   {{#if comments.length}}
   <div class="col-md-6 project-list">
     <h3>Current Comment:</h3>
 
     {{#each comments as |comment|}}
     {{!-- renders comments --}}
-    {{!-- <div class="row mb-2">
+    <div class="row mb-2">
       <div class="col-md-8">
-        <h4><a href="/post/{{post.id}}">{{comment.name}}</a></h4>
-      </div>
+         <h4>{{comment.description}}</h4> 
+      </div> 
       <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{post.id}}">DELETE</button>
+        <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
       </div>
-    </div> --}}
+       <p>Created by {{writer.name}} on {{format_date date_created}}</p>
+    </div>
 
     {{/each}}
   </div>
@@ -30,3 +42,5 @@
 
 
 </div>
+
+<script src="js/form.js"></script>
