@@ -14,7 +14,7 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      response.render()
+      document.location.replace('/homepage');
     } else {
       alert("Failed to create comment");
     }
@@ -36,10 +36,11 @@ const delButtonHandler = async (event) => {
       }
     }
   };
+
 document
-  .querySelector(".login-form")
+  .querySelector(".submit-button")
   .addEventListener("submit", newFormHandler);
   
-  document
-  .querySelector('.project-list')
-  .addEventListener('click', delButtonHandler);
+  // document
+  // .querySelector('.dlt-button')
+  // .addEventListener('click', delButtonHandler);

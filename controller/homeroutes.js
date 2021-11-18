@@ -4,7 +4,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all projects and JOIN with user data
+    // Get all posts on to homepage and JOIN with user data
     const postData = await Post.findAll({
       include: [
         {
@@ -27,6 +27,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+
 router.get("/posts/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
@@ -35,19 +36,18 @@ router.get("/posts/:id", async (req, res) => {
           model: Writer,
           attributes: ["name"],
         },
-        {
-          model: Comment,
-          attributes:["description"]
-        },
+        // {
+        //   model: Comment,
+        // },
       ],
     });
 
-    const post = postData.get({ plain: true });
+    const posts = postData.get({ plain: true });
 
-    console.log(post);
-    res.render("post", {
+    console.log(posts);
+    res.render("posts", {
       // Uses the spread operator
-      ...post,
+      ...posts,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

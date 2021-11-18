@@ -17,7 +17,7 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 // not working to render the comments
-router.post("/posts/:id", withAuth, async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
     console.log(req.body);
     const newComment = await Comment.create({
@@ -25,11 +25,27 @@ router.post("/posts/:id", withAuth, async (req, res) => {
       date_created: req.body.date_created,
       writer_id: req.body.writer_id,
     });
+    console.log(newComment)
     res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
   }
 });
+// Update posts
+router.put("/:id", withAuth, async (req, res)=>{
+try{
+const updatedPost = Post.update(req.body,{
+  where:{
+    id:req.params.id
+  }
+})
+res.status(200).json(updatedPost)
+}catch(err){
+  res.status(400).json(err);
+}
+
+})
+
 
 router.delete("/:id", withAuth, async (req, res) => {
   try {
