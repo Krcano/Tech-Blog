@@ -36,9 +36,9 @@ router.get("/posts/:id", async (req, res) => {
           model: Writer,
           attributes: ["name"],
         },
-        // {
-        //   model: Comment,
-        // },
+        {
+          model: Comment,
+        },
       ],
     });
 
@@ -54,6 +54,7 @@ router.get("/posts/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 // Use withAuth middleware to prevent access to route
 router.get("/profile", withAuth, async (req, res) => {

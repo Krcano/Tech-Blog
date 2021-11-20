@@ -37,13 +37,27 @@ const newFormHandler = async (event) => {
     }
   };
 
- 
+  // const UpdateBttnHandler = async (event) => {
+  //   if (event.target.hasAttribute('data-id')) {
+  //     const id = event.target.getAttribute('data-id');
+  
+  //     const response = await fetch(`/api/posts/${id}`, {
+  //       method: 'Get',
+  //     });
+  
+     
+  //   }
+  // };
+// 
   
   document
-    .querySelector('.new-project-form')
+    .querySelector('.new-post')
     .addEventListener('submit', newFormHandler);
   
+    // document
+    // .querySelector('#update')
+    // .addEventListener('click', UpdateBttnHandler);
   document
-    .querySelector('.project-list')
+    .querySelector('.post-list')
     .addEventListener('click', delButtonHandler);
   
