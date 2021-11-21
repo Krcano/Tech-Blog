@@ -31,17 +31,9 @@ Writer.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      // validate: {
-      //   len: [8],
-      // },
+      
     },
-    // post_id: {
-    //     type: DataTypes.INTEGER,
-    //     references: {
-    //       model: "post",
-    //       key: "id",
-    //     },
-    //   },
+   
   },
   {
     hooks: {

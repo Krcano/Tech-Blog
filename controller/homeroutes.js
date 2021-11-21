@@ -4,7 +4,7 @@ const withAuth = require("../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    // Get all posts on to homepage and JOIN with user data
+    // Get all posts on to homepage
     const postData = await Post.findAll({
       include: [
         {
@@ -26,7 +26,6 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 router.get("/posts/:id", async (req, res) => {
   try {
@@ -54,7 +53,6 @@ router.get("/posts/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 // Use withAuth middleware to prevent access to route
 router.get("/profile", withAuth, async (req, res) => {

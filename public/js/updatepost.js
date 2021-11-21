@@ -3,10 +3,10 @@
 const UpdateBttnHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector("#project-name").value.trim();
-  const description = document.querySelector("#project-desc").value.trim();
-
-  
+  const name = document.querySelector("#post-name").value.trim();
+  const description = document.querySelector("#post-desc").value.trim();
+console.log(name, description)
+  if (name && description) {
     const id = event.target.getAttribute("data-id");
     const response = await fetch(`/api/posts/${id}`, {
       method: "Put",
@@ -21,7 +21,7 @@ const UpdateBttnHandler = async (event) => {
     } else {
       alert("Failed to update post");
     }
-  
+  }
 };
 
 

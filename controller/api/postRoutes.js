@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Post, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
-
+// creates posts
 router.post("/", withAuth, async (req, res) => {
   try {
     console.log(req.body);
@@ -16,7 +16,7 @@ router.post("/", withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-// not working to render the comments
+// creates comments
 router.post("/comments", withAuth, async (req, res) => {
   try {
     console.log(req.body);
@@ -33,34 +33,42 @@ router.post("/comments", withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-// Update posts
+// uses put method to update posts/ Update posts not working
 router.put("/:id", withAuth, async (req, res) => {
   try {
-    const updatedPost = Post.update(req.body, {
-      where: {
-        id: req.params.id,
+    const updatedPosts = await Post.update(
+      {
+        name: req.body.name,
+        description: req.body.description,
       },
-    });
-    const Uposts = updatedPost.get({ plain: true });
+      { where: { id: req.params.id } },
+      // { returning: true, where: { id: req.params.id } }
+    );
+
     res.render("profile", {
-      ...Uposts,
+      updatedPosts,
       logged_in: true,
     });
-    res.status(200).json(updatedPost);
+    res.status(200).json(updatedPosts);
   } catch (err) {
+    console.log(err);
     res.status(400).json(err);
   }
 });
-// go back for try catch
+// to display updated post on the updateposts page /Not woring
 router.get("/updateposts/:id", withAuth, async (req, res) => {
-  try{
-  const updatedPost = Post.findByPk(req.params.id);
-  res.render("updatePost", updatedPost);
-  }catch(err){
-    res.status(400).json(err)
+  try {
+    const post = await Post.findByPk(req.params.id);
+
+    const updatedPosts = post.get({ plain: true });
+    console.log(updatedPosts);
+    res.render("updatePost", updatedPosts);
+  } catch (err) {
+   
+    res.status(400).json(err);
   }
 });
-
+// Deletes a Post
 router.delete("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.destroy({
@@ -81,6 +89,7 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
+// Deletes a Comment
 router.delete("/comments/:id", withAuth, async (req, res) => {
   try {
     const commentData = await Comment.destroy({
