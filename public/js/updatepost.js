@@ -2,15 +2,18 @@
 
 const UpdateBttnHandler = async (event) => {
   event.preventDefault();
+  const pathName = window.location.pathname;
+  const pathArray = pathName.split("/");
+  const post_id = pathArray[pathArray.length - 1];
 
   const name = document.querySelector("#post-name").value.trim();
   const description = document.querySelector("#post-desc").value.trim();
-console.log(name, description)
+
   if (name && description) {
-    const id = event.target.getAttribute("data-id");
-    const response = await fetch(`/api/posts/${id}`, {
+    // const id = event.target.getAttribute("data-id");
+    const response = await fetch(`/api/posts/${post_id}`, {
       method: "Put",
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ name, description, post_id }),
       headers: {
         "Content-Type": "application/json",
       },
@@ -24,7 +27,4 @@ console.log(name, description)
   }
 };
 
-
-  document
-    .querySelector('#update')
-    .addEventListener('click', UpdateBttnHandler);
+document.querySelector("#update").addEventListener("click", UpdateBttnHandler);

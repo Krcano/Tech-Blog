@@ -12,6 +12,8 @@ This project is a tech blog website that uses Node.js, Express,MySQL, and Handle
 ## Usage
 To get started log in to your account or sign up with your name, email, and password. Then you will be redirected to your profile page where you can create a new post. Once you create a post it will pop up on the profile page and the homepage. From there you should have the ability to delete any of the posts you create. You can also add comments to any of the posts by pressing the post you want and there will be a text box to add a comment. You can also delete any comment you want. If you are inactive for 15 minutes on the site it will log you for security purposes and then you will have to log back in if you wish to do anything else.
 
+## Installation
+To get started make sure to have node.js and MysQL installed on your computer. Clone the repositroy and then use the command 'npm install' to install all the dependecies. Log in to Mysql and enter the password. After source the schema by using the command 'source db/schema.sql'. Then you will exit Mysql and seed the data by running the command npm run seed and then start your server by typing the command 'node server.js'.
 
 ## License
 
