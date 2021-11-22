@@ -64,7 +64,7 @@ router.delete("/:id", withAuth, async (req, res) => {
 });
 
 // creates comments
-router.post("/comments", withAuth, async (req, res) => {
+router.post("/comments",  async (req, res) => {
   try {
     console.log(req.body);
     console.log(req.session);
@@ -75,27 +75,28 @@ router.post("/comments", withAuth, async (req, res) => {
     });
     console.log(newComment);
     res.status(200).json(newComment).redirect("/");
+   
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
   }
 });
 
-router.get("/comments/:id", async (req, res) => {
-  try {
-    const allComments = await Comment.findAll({
-      include: [Writer],
-    });
-    const comments = allComments.map((comment) => comment.get({ plain: true }));
-    res.render("posts", {
-      comments,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+// router.get("/comments/:id", async (req, res) => {
+//   try {
+//     const allComments = await Comment.findAll({
+//       include: [Writer],
+//     });
+//     const comments = allComments.map((comment) => comment.get({ plain: true }));
+//     res.render("posts", {
+//       comments,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 // Deletes a Comment
-router.delete("/comments/:id", withAuth, async (req, res) => {
+router.delete("/comments/:id", async (req, res) => {
   try {
     const commentData = await Comment.destroy({
       where: {
