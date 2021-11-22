@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Post, Comment, Writer } = require("../../models");
+const { Post, Comment } = require("../../models");
 const withAuth = require("../../utils/auth");
 // creates posts
 router.post("/", withAuth, async (req, res) => {
@@ -16,18 +16,43 @@ router.post("/", withAuth, async (req, res) => {
     res.status(400).json(err);
   }
 });
-
+// creates comments
+router.post("/comments", withAuth, async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log(req.session);
+    const newComment = await Comment.create({
+      description: req.body.description,
+      writer_id: req.session.writer_id,
+      post_id: parseInt(req.body.post_id),
+    });
+    console.log(newComment);
+    res.status(200).json(newComment).redirect("/");
+  } catch (err) {
+    console.log(err);
+    res.status(400).json(err);
+  }
+});
 // uses put method to update posts/ Update posts not working
 router.put("/:id", withAuth, async (req, res) => {
   try {
-    const [updatedPosts] = await Post.update(req.body, {
-      where: { id: req.params.id },
+    const updatedPosts = await Post.update(
+      {
+        name: req.body.name,
+        description: req.body.description,
+      },
+      { where: { id: req.params.id } },
+      // { returning: true, where: { id: req.params.id } }
+    );
+
+    res.render("profile", {
+      updatedPosts,
+      logged_in: true,
     });
-    if (updatedPosts > 0) {
-      res.status(200);
-    }
+    res.status(200).json(updatedPosts);
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+    res.status(400).json(err);
   }
 });
 // to display updated post on the updateposts page /Not woring
@@ -39,6 +64,7 @@ router.get("/updateposts/:id", withAuth, async (req, res) => {
     console.log(updatedPosts);
     res.render("updatePost", updatedPosts);
   } catch (err) {
+   
     res.status(400).json(err);
   }
 });
@@ -63,40 +89,8 @@ router.delete("/:id", withAuth, async (req, res) => {
   }
 });
 
-// creates comments
-router.post("/comments",  async (req, res) => {
-  try {
-    console.log(req.body);
-    console.log(req.session);
-    const newComment = await Comment.create({
-      description: req.body.description,
-      writer_id: req.session.writer_id,
-      post_id: parseInt(req.body.post_id),
-    });
-    console.log(newComment);
-    res.status(200).json(newComment).redirect("/");
-   
-  } catch (err) {
-    console.log(err);
-    res.status(400).json(err);
-  }
-});
-
-// router.get("/comments/:id", async (req, res) => {
-//   try {
-//     const allComments = await Comment.findAll({
-//       include: [Writer],
-//     });
-//     const comments = allComments.map((comment) => comment.get({ plain: true }));
-//     res.render("posts", {
-//       comments,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 // Deletes a Comment
-router.delete("/comments/:id", async (req, res) => {
+router.delete("/comments/:id", withAuth, async (req, res) => {
   try {
     const commentData = await Comment.destroy({
       where: {
