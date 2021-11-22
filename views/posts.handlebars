@@ -22,13 +22,13 @@
 
   {{#if comments.length}}
   <div class="col-md-6 project-list">
-    <h3>Current Comment:</h3>
+   
 
     {{#each comments as |comment|}}
     {{!-- renders comments --}}
     <div class="row mb-2 ">
       <div class="col-md-8">
-         <h4>{{comment.description}}</h4> 
+         <h6>{{comment.description}}</h6> 
       </div> 
       <div class="col-md-4">
         <button class="btn btn-sm btn-danger dlt-button" data-id="{{comment.id}}">DELETE</button>
