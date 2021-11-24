@@ -36,6 +36,8 @@ router.post("/comments", withAuth, async (req, res) => {
 // uses put method to update posts/ Update posts not working
 router.put("/:id", withAuth, async (req, res) => {
   try {
+    console.log(req.body)
+   
     const updatedPosts = await Post.update(
       {
         name: req.body.name,
@@ -44,12 +46,12 @@ router.put("/:id", withAuth, async (req, res) => {
       { where: { id: req.params.id } },
       // { returning: true, where: { id: req.params.id } }
     );
-
-    res.render("profile", {
-      updatedPosts,
-      logged_in: true,
-    });
-    res.status(200).json(updatedPosts);
+    console.log(updatedPosts)
+    // res.render("profile", {
+    //   updatedPosts,
+    //   logged_in: true,
+    // });
+    res.status(200).json(updatedPosts)
   } catch (err) {
     console.log(err);
     res.status(400).json(err);

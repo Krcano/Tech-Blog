@@ -16,7 +16,7 @@ const newFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace(`/posts/${post_id}`);
     } else {
       alert("Failed to create comment");
     }
@@ -26,15 +26,17 @@ const newFormHandler = async (event) => {
 const delButtonHandler = async (event) => {
   if (event.target.hasAttribute("data-id")) {
     const id = event.target.getAttribute("data-id");
-
+    const pathName = window.location.pathname;
+  const pathArray = pathName.split("/");
+  const post_id = pathArray[pathArray.length - 1];
     const response = await fetch(`/api/posts/comments/${id}`, {
       method: "DELETE",
     });
 
     if (response.ok) {
-      document.location.replace("/");
+      document.location.replace(`/posts/${post_id}`);
     } else {
-      console.log(error)
+      
       alert("Failed to delete post");
     }
   }

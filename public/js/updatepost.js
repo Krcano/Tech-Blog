@@ -8,7 +8,7 @@ const UpdateBttnHandler = async (event) => {
 
   const name = document.querySelector("#post-name").value.trim();
   const description = document.querySelector("#post-desc").value.trim();
-
+console.log('hi')
   if (name && description) {
     // const id = event.target.getAttribute("data-id");
     const response = await fetch(`/api/posts/${post_id}`, {
@@ -21,6 +21,7 @@ const UpdateBttnHandler = async (event) => {
 
     if (response.ok) {
       document.location.replace("/profile");
+      console.log('good response')
     } else {
       alert("Failed to update post");
     }
