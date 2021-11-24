@@ -27,8 +27,8 @@ const delButtonHandler = async (event) => {
   if (event.target.hasAttribute("data-id")) {
     const id = event.target.getAttribute("data-id");
     const pathName = window.location.pathname;
-  const pathArray = pathName.split("/");
-  const post_id = pathArray[pathArray.length - 1];
+    const pathArray = pathName.split("/");
+    const post_id = pathArray[pathArray.length - 1];
     const response = await fetch(`/api/posts/comments/${id}`, {
       method: "DELETE",
     });
@@ -36,7 +36,6 @@ const delButtonHandler = async (event) => {
     if (response.ok) {
       document.location.replace(`/posts/${post_id}`);
     } else {
-      
       alert("Failed to delete post");
     }
   }

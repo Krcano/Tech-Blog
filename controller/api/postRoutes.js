@@ -27,7 +27,7 @@ router.post("/comments", withAuth, async (req, res) => {
       post_id: parseInt(req.body.post_id),
     });
     console.log(newComment);
-    res.status(200).json(newComment).redirect("/");
+    res.status(200).json(newComment).redirect("/profile");
   } catch (err) {
     console.log(err);
     res.status(400).json(err);
@@ -44,13 +44,10 @@ router.put("/:id", withAuth, async (req, res) => {
         description: req.body.description,
       },
       { where: { id: req.params.id } },
-      // { returning: true, where: { id: req.params.id } }
+      
     );
     console.log(updatedPosts)
-    // res.render("profile", {
-    //   updatedPosts,
-    //   logged_in: true,
-    // });
+    
     res.status(200).json(updatedPosts)
   } catch (err) {
     console.log(err);

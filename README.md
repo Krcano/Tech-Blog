@@ -3,7 +3,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-success.svg)
 
 ## Description
-This project is a tech blog website that uses Node.js, Express,MySQL, and Handlebars. It allows the users to create an account or login if they already have one. Once they are in their account they can create a new post and it will show up on the homepage and on their profile. Once they create a post anyone can add a comment on that post or delete a comment. The original writer of a post can also delete their own posts. I'm still working on the update post feature but soon to come a user should be able to edit or update an old post.
+This project is a tech blog website that uses Node.js, Express,MySQL, and Handlebars. It allows the users to create an account or login if they already have one. Once they are in their account they can create a new post and it will show up on the homepage and on their profile. Once they create a post anyone can add a comment on that post or delete a comment. The original writer of a post can also delete their own posts.
 ![login](Assets/login.png)
 ![homepage](Assets/homepage.png)
 ![profile](Assets/profile.png)
@@ -11,7 +11,7 @@ This project is a tech blog website that uses Node.js, Express,MySQL, and Handle
 [walk through video](https://drive.google.com/file/d/1BgbAOqd91RaP9huDQCPMiBOUfQ1pT7fN/view)
 
 ## Usage
-To get started log in to your account or sign up with your name, email, and password. Then you will be redirected to your profile page where you can create a new post. Once you create a post it will pop up on the profile page and the homepage. From there you should have the ability to delete any of the posts you create. You can also add comments to any of the posts by pressing the post you want and there will be a text box to add a comment. You can also delete any comment you want. If you are inactive for 15 minutes on the site it will log you for security purposes and then you will have to log back in if you wish to do anything else.
+To get started log in to your account or sign up with your name, email, and password. Then you will be redirected to your profile page where you can create a new post. Once you create a post it will pop up on the profile page and the homepage. From there you should have the ability to delete and update any of the posts you create. You can also add comments to any of the posts by pressing the post you want and there will be a text box to add a comment. You can also delete any comment you want. If you are inactive for 15 minutes on the site it will log you for security purposes and then you will have to log back in if you wish to do anything else.
 
 ## Installation
 To get started make sure to have node.js and MysQL installed on your computer. Clone the repositroy and then use the command 'npm install' to install all the dependecies. Log in to Mysql and enter the password. After source the schema by using the command 'source db/schema.sql'. Then you will exit Mysql and seed the data by running the command npm run seed and then start your server by typing the command 'node server.js'.
