@@ -8,7 +8,7 @@ This project is a tech blog website that uses Node.js, Express,MySQL, and Handle
 ![homepage](Assets/homepage.png)
 ![profile](Assets/profile.png)
 ![comment](Assets/comment.png)
-[walk through video](https://drive.google.com/file/d/15yVXAp-5LKFUjFeTJUxfp7YkPlTVQnJX/view)
+
 [Deployed App](https://pacific-cliffs-94965.herokuapp.com/)
 
 ## Usage
